@@ -1,0 +1,41 @@
+{% extends 'basic.html' %}
+{% load static %} 
+{% block title %} 
+Library Management System 
+{% endblock %} 
+{% block css %} 
+{% endblock %} 
+{% block body %} 
+
+<head>
+  <link rel="stylesheet" href="{%static 'student_login.css'%}" />
+</head>
+<form method="POST" class="login-form">
+  {% csrf_token %}
+  <div class="all">
+  <p class="login-text">
+    <span class="fa-stack fa-lg">
+      <i class="fa fa-circle fa-stack-2x"></i>
+      <i class="fa fa-lock fa-stack-1x"></i>
+    </span>
+  </p>
+  <input
+    type="text"
+    class="login-username"
+    name="username"
+    placeholder="Enter Username"
+    required
+  />
+  <input
+    type="password"
+    class="login-password"
+    name="password"
+    placeholder="Enter Password"
+    required
+  />
+  <button type="submit" class="login-submit">Login</button>
+</form>
+<div class="underlay-photo"></div>
+<div class="underlay-black"></div>
+</div>
+{% endblock %}

@@ -1,0 +1,117 @@
+{% extends 'student_navbar.html' %}
+{% load static %}
+{% block title %} All Students List {% endblock %}
+{% block css %}
+<style>
+    .badge-success {
+        background-color: #28a745;
+        color: white;
+        padding: 8px 12px;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+    .alert {
+        position: relative;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border: 1px solid transparent;
+        border-radius: 0.25rem;
+    }
+    .alert-success {
+        color: #155724;
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+    }
+    .alert-warning {
+        color: #856404;
+        background-color: #fff3cd;
+        border-color: #ffeeba;
+    }
+    .close {
+        float: right;
+        font-size: 1.5rem;
+        font-weight: 700;
+        line-height: 1;
+        color: #000;
+        text-shadow: 0 1px 0 #fff;
+        opacity: .5;
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+        {{ message }}
+        <button type="button" class="close" onclick="this.parentElement.style.display='none';" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    
+    <h1 class="text-center"><u>All Issued Books</u></h1>
+    <table class="table table-hover" id="example">
+        <thead>
+            <tr class="text-center">
+                <th>Sr.No</th>
+                <th>Student ID</th>
+                <th>Student Name</th>
+                <th>Book Name</th>
+                <th>Author</th>
+                <th>Issued Date</th>
+                <th>Expiry Date</th>
+                <th>Return Date</th>
+                <th>Status</th>
+                <th>Fine</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in details %}
+            <tr class="text-center">
+                <td>{{forloop.counter}}.</td>
+                <td>{{i.0}}</td>
+                <td>{{i.1}}</td>
+                <td>{{i.2}}</td>
+                <td>{{i.3}}</td>
+                <td>{{i.4}}</td>
+                <td>{{i.5}}</td>
+                <td>{{i.6|default:"Not Returned"}}</td>
+                <td>{{i.8}}</td>
+                <td>₹ {{i.7}}</td>
+                <td>
+                    {% if i.8 == 'ISSUED' %}
+                    <a href="/return_book/{{i.9}}/" class="btn btn-primary">Return Book</a>
+                    {% elif i.8 == 'RETURNED' %}
+                        {% if i.10 %}
+                        <span class="badge badge-success">Feedback Submitted</span>
+                        {% else %}
+                        <a href="/submit_feedback/{{i.9}}/" class="btn btn-info">Submit Feedback</a>
+                        {% endif %}
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script>
+    // Function to close alert messages
+    document.addEventListener('DOMContentLoaded', function() {
+        var closeButtons = document.getElementsByClassName('close');
+        for (var i = 0; i < closeButtons.length; i++) {
+            closeButtons[i].addEventListener('click', function() {
+                this.parentElement.style.display = 'none';
+            });
+        }
+    });
+</script>
+{% endblock %}

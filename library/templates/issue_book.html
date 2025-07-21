@@ -1,0 +1,55 @@
+{% extends 'admin_navbar.html' %}
+{% load static %}
+{% block title %} Issue Book {% endblock %}
+{% block css %}
+{% endblock %}
+{% block body %}
+<div class="container mt-4">
+    <form method="POST"> {% csrf_token %}
+        {% for i in form %}
+        <div class="form-group">
+            <br>
+          <label class="control-label col-xs-4">{{ i.label_tag }}</label>
+          <div class="col-xs-8 mt-2">
+          {{ i }}
+           </div>
+        </div>
+        {% endfor %}
+        <div class="form-group">
+            <br>
+            <label class="control-label col-xs-4">Expiry Date</label>
+            <div class="col-xs-8 mt-2">
+                <input type="text" id="expiry_date" class="form-control" readonly>
+            </div>
+        </div>
+    <button type="submit" class="btn btn-outline-primary mt-4">Issue Book</button>
+</div>
+</form>
+{% endblock %}
+{% block js %}
+<script>
+    {% if alert %}
+    alert("Book Successfully Issued.")
+    document.location = "/issue_book"
+    {% endif %}
+
+    // Function to calculate and display expiry date
+    function updateExpiryDate() {
+        const issueDate = document.querySelector('input[name="issue_date"]').value;
+        if (issueDate) {
+            const date = new Date(issueDate);
+            date.setDate(date.getDate() + 14);
+            const expiryDate = date.toISOString().split('T')[0];
+            document.getElementById('expiry_date').value = expiryDate;
+        }
+    }
+
+    // Set initial expiry date
+    document.addEventListener('DOMContentLoaded', function() {
+        const issueDateInput = document.querySelector('input[name="issue_date"]');
+        issueDateInput.addEventListener('change', updateExpiryDate);
+        updateExpiryDate(); // Calculate initial expiry date
+    });
+</script>
+{% endblock %}
+

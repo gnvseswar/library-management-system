@@ -1,0 +1,106 @@
+{% extends 'basic.html' %} {% load static %} {% block title %} Library
+Management System {% endblock %} {% block css %}
+<style>
+  /* Style the body for a pleasing background */
+  body {
+    background-image: url("{% static 'library.webp' %}"); /* Replace with your desired background image */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .main_heading {
+    text-align: center;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    margin-top: 26vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 20px;
+  }
+
+  /* Style the container for better centering and spacing */
+  .container {
+    display: flex;
+    margin-top: 12vh;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
+  /* Style the cards for a more modern and visually appealing look */
+  .card {
+    align-items: center;
+    width: 250px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease-in-out;
+    margin: 10px;
+    text-align: center;
+    padding: 20px;
+  }
+  .card img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+
+  .card:hover {
+    transform: scale(1.02);
+    cursor: pointer;
+  }
+
+  /* Style the headings for a clear distinction between user types */
+  .heading {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  /* Style the login buttons for a call to action effect */
+  .card-btn {
+    text-decoration: none;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .card-btn:hover {
+    background-color: #222;
+  }
+</style>
+{% endblock %} {% block body %}
+<body>
+  <div class="main_heading">
+    <h1>Library Management System</h1>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6 mb-3 m">
+          <div class="card">
+            <img src="{% static 'admin.webp' %}" alt="admin" />
+            <p class="heading">ADMIN</p>
+            <div class="overlay"></div>
+            <a class="card-btn" href="/admin_login/">Login</a>
+          </div>
+        </div>
+        <div class="col-sm-6 mb-3">
+          <div class="card">
+            <img src="{% static 'student.webp' %}" alt="student" />
+            <p class="heading">Student</p>
+            <div class="overlay"></div>
+            <a class="card-btn" href="/student_login/">Login</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+{% endblock %}

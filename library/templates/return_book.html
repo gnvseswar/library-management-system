@@ -1,0 +1,31 @@
+{% extends 'student_navbar.html' %}
+{% load static %}
+{% block title %} Return Book {% endblock %}
+{% block css %}
+{% endblock %}
+{% block body %}
+<div class="container mt-4">
+    <h1 class="text-center"><u>Return Book</u></h1>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Book Details</h5>
+                    <p><strong>Book ISBN:</strong> {{ issued_book.isbn }}</p>
+                    <p><strong>Issued Date:</strong> {{ issued_book.issued_date }}</p>
+                    <p><strong>Expiry Date:</strong> {{ issued_book.expiry_date }}</p>
+                    
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="return_date">Return Date</label>
+                            {{ form.return_date }}
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-3">Return Book</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

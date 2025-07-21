@@ -1,0 +1,46 @@
+{% extends 'basic.html' %} {% load static %} {% block title %} Library
+Management System {% endblock %} {% block css %} {% endblock %} {% block body %}
+<head>
+  <link rel="stylesheet" href="{% static 'admin_login.css' %}" />
+  <title>Admin Login</title>
+</head>
+<head>
+  <link rel="stylesheet" href="{%static 'admin_login.css'%}" />
+</head>
+
+<div class="all">
+  <form method="POST" class="login-form">
+    {% csrf_token %}
+    <p class="login-text">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-lock fa-stack-1x"></i>
+      </span>
+    </p>
+    <input
+      type="text"
+      class="login-username"
+      name="username"
+      placeholder="Enter Username"
+      required
+    />
+    <input
+      type="password"
+      class="login-password"
+      name="password"
+      placeholder="Enter Password"
+      required
+    />
+    <button type="submit" class="login-submit">Login</button>
+  </form>
+  <div class="underlay-photo"></div>
+  <div class="underlay-black"></div>
+</div>
+{% endblock %} {% block js %}
+<script>
+  {% if alert %}
+  alert("Invalid Username or Password.")
+  document.location = "/admin_login"
+  {% endif %}
+</script>
+{% endblock %}
